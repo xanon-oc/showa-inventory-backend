@@ -1,0 +1,21 @@
+export const historyQuery = {
+  WEEKLY: 'weekly',
+  DAILY: 'daily',
+  MONTHLY: 'monthly',
+  YEARLY: 'yearly',
+};
+
+export const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
