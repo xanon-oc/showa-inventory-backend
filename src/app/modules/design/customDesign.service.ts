@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
 import AppError from '../../errors/AppError';
 import { User } from '../auth/auth.model';
-import { TCustomShoeDesign } from './customDesign.interface';
 import { CustomShoeDesign } from './customDesign.model';
+import { TCustomShoeDesign } from './customDesign.interface';
 
 // add custom shoe design into db
 const addCustomShoeDesignToDB = async (payload: TCustomShoeDesign) => {
@@ -15,47 +16,44 @@ const addCustomShoeDesignToDB = async (payload: TCustomShoeDesign) => {
 };
 
 // update custom shoe design into db
-// const updateCustomShoeDesignToDB = async ({
-//   id,
-//   status,
-// }: TShoePolishUpdate) => {
-//   // checking if the shoe polish request exists
-//   const isShoePolishExists = await ShoePolish.findById(id);
-//   if (!isShoePolishExists) {
-//     throw new AppError(httpStatus.NOT_FOUND, 'Shoe polish not found');
-//   }
 
-//   // getting the current status of the shoe polish request
-//   const currentStatus = isShoePolishExists.status;
+const updateCustomShoeDesignToDB = async ({
+  id,
+  data,
+}: {
+  id: string;
+  data: TCustomShoeDesign;
+}) => {
+  // checking if the custom shoe design exists
+  const existingCustomShoeDesign = await CustomShoeDesign.findById(id);
+  if (!existingCustomShoeDesign) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Custom shoe design not found');
+  }
 
-//   // validate if the requested status transition is valid based on the current status
-//   if (
-//     (currentStatus === 'pending' && status === 'processing') ||
-//     (currentStatus === 'processing' && status === 'completed')
-//   ) {
-//     // if the transition is valid
-//     isShoePolishExists.status = status;
-//     const result = await isShoePolishExists.save();
-//     return result;
-//   } else if (currentStatus === 'pending' && status === 'completed') {
-//     // if the user is trying to update from pending to completed
-//     throw new AppError(
-//       httpStatus.BAD_REQUEST,
-//       'Cannot change status from pending to completed directly',
-//     );
-//   } else if (currentStatus === 'completed') {
-//     // if the shoe polish request is already completed
-//     throw new AppError(
-//       httpStatus.BAD_REQUEST,
-//       'Shoe polish request is already completed',
-//     );
-//   } else {
-//     // for all other invalid status transitions, throwing a general error
-//     throw new AppError(httpStatus.BAD_REQUEST, 'Invalid status transition');
-//   }
-// };
+  // updating the custom shoe design with the new data dynamically
+  Object.keys(data).forEach((key) => {
+    if (key === 'customization' && typeof data[key] === 'object') {
+      // if the property is 'customization', update its sub-properties
+      Object.keys(data[key] as Record<string, unknown>).forEach((subKey) => {
+        // Refining the type to allow any property access
+        (existingCustomShoeDesign as any).customization[subKey] = (
+          data[key] as any
+        )[subKey];
+      });
+    } else {
+      // otherwise, updating the property directly
+      (existingCustomShoeDesign as any)[key] = (data as any)[key];
+    }
+  });
+
+  const updatedCustomShoeDesign = await existingCustomShoeDesign.save();
+
+  return updatedCustomShoeDesign;
+};
+
+// get all custom design
 
 export const CustomShoeDesignService = {
   addCustomShoeDesignToDB,
-  //   updateCustomShoeDesignToDB,
+  updateCustomShoeDesignToDB,
 };

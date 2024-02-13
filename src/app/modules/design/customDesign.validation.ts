@@ -12,8 +12,19 @@ const AddCustomShoeDesignSchemaValidation = z.object({
     }),
   }),
 });
-const UpdateCustomShoeDesignSchemaValidation =
-  AddCustomShoeDesignSchemaValidation.partial();
+const UpdateCustomShoeDesignSchemaValidation = z.object({
+  body: z.object({
+    designName: z.string().optional(),
+    customization: z
+      .object({
+        colors: z.string().optional(),
+        patterns: z.string().optional(),
+        material: z.enum(['Leather', 'fabric']).optional(),
+        customFeatures: z.string().optional(),
+      })
+      .optional(),
+  }),
+});
 
 export const CustomShoeDesignSchemaValidation = {
   AddCustomShoeDesignSchemaValidation,

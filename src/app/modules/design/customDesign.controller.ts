@@ -16,5 +16,24 @@ const addCustomShoeDesign = catchAsync(async (req, res) => {
     data: result,
   });
 });
+// add custom shoe design
 
-export const CustomShoeDesignController = { addCustomShoeDesign };
+const updateCustomShoeDesign = catchAsync(async (req, res) => {
+  const payload = {
+    id: req.params.id,
+    data: req.body,
+  };
+  const result =
+    await CustomShoeDesignService.updateCustomShoeDesignToDB(payload);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Custom shope design updated successfully',
+    data: result,
+  });
+});
+
+export const CustomShoeDesignController = {
+  addCustomShoeDesign,
+  updateCustomShoeDesign,
+};

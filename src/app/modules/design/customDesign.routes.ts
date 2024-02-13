@@ -14,13 +14,13 @@ router.post(
   ),
   CustomShoeDesignController.addCustomShoeDesign,
 );
-// router.patch(
-//   '/updateShoePolishRequest/:id',
-//   auth('admin', 'user'),
-//   ValidateRequest(
-//     ShoePolishRequestSchemaValidation.ShoePolishRequestUpdateSchema,
-//   ),
-//   ShoePolishRequestController.updateShoePolishRequest,
-// );
+router.put(
+  '/updateCustomShoeDesign/:id',
+  auth('admin', 'user'),
+  ValidateRequest(
+    CustomShoeDesignSchemaValidation.UpdateCustomShoeDesignSchemaValidation,
+  ),
+  CustomShoeDesignController.updateCustomShoeDesign,
+);
 
 export const CustomShoeDesignRouter = router;

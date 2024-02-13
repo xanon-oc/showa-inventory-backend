@@ -1,18 +1,32 @@
 import { Schema, model } from 'mongoose';
-import { TCustomShoeDesign } from './customDesign.interface';
+import {
+  CustomShoeDesignModel,
+  TCustomShoeDesign,
+} from './customDesign.interface';
 
-const CustomShoeDesignSchema = new Schema<TCustomShoeDesign>({
-  userId: { type: String, required: true },
-  designName: { type: String, required: true },
+const CustomShoeDesignSchema = new Schema<
+  TCustomShoeDesign,
+  CustomShoeDesignModel
+>({
+  userId: { type: String },
+  designName: { type: String },
   customization: {
-    colors: { type: String, required: true },
-    patterns: { type: String, required: true },
-    material: { type: String, enum: ['Leather', 'fabric'], required: true },
-    customFeatures: { type: String, required: true },
+    colors: { type: String },
+    patterns: { type: String },
+    material: { type: String, enum: ['Leather', 'fabric'] },
+    customFeatures: { type: String },
   },
 });
 
-export const CustomShoeDesign = model<TCustomShoeDesign>(
+// checking if the custom design exists in the DB
+
+CustomShoeDesignSchema.statics.isCustomShoeDesignExists = async function (
+  shoeId: string,
+) {
+  return await CustomShoeDesign.findById(shoeId);
+};
+
+export const CustomShoeDesign = model<TCustomShoeDesign, CustomShoeDesignModel>(
   'CustomShoeDesign',
   CustomShoeDesignSchema,
 );

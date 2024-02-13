@@ -5,7 +5,7 @@ import { ShoePolishRequest } from './shoePolishing.interface';
 import { ShoePolish } from './shoePolishing.model';
 import { TShoePolishUpdate } from './shoePolish.constant';
 
-// add shoe polish onto db
+// add shoe polish into db
 const addShoePolishRequestIntoDB = async (payload: ShoePolishRequest) => {
   const isUserExists = await User.isUserExists(payload.userId);
   if (!isUserExists) {
@@ -14,7 +14,7 @@ const addShoePolishRequestIntoDB = async (payload: ShoePolishRequest) => {
   const result = await ShoePolish.create(payload);
   return result;
 };
-// update shoe polish status onto db
+// update shoe polish status into db
 const updateShoePolishRequestIntoDB = async ({
   id,
   status,
@@ -55,6 +55,7 @@ const updateShoePolishRequestIntoDB = async ({
   }
 };
 
+// get all shoe polish from db
 export const ShoePolishRequestService = {
   addShoePolishRequestIntoDB,
   updateShoePolishRequestIntoDB,
