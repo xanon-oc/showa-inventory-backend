@@ -1,6 +1,7 @@
 import { Sales } from '../sales/sales.model';
 import { historyQuery } from './history.constant';
 
+// sales history
 const salesHistoryFromDB = async (query: string) => {
   let aggregationPipeline;
 

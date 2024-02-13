@@ -1,10 +1,9 @@
-// Add a new pair of shoes to the inventory.
-
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { ShoeServices } from './shoes.service';
 
+// Add a new pair of shoes to the inventory.
 const addAShoes = catchAsync(async (req, res) => {
   const result = await ShoeServices.addAShoesIntoDB(req.body);
   sendResponse(res, {

@@ -1,5 +1,3 @@
-// Add a new pair of shoes to the inventory.
-
 import httpStatus from 'http-status';
 import AppError from '../../errors/AppError';
 import { TShoe } from './shoes.interface';
@@ -7,6 +5,7 @@ import { Shoe } from './shoes.model';
 import QueryBuilder from '../../builder/QueryBuilder';
 import { InventorySearchableFields } from './shoes.constant';
 
+// Add a new pair of shoes to the inventory.
 const addAShoesIntoDB = async (payload: TShoe) => {
   const result = await Shoe.create(payload);
   return result;
