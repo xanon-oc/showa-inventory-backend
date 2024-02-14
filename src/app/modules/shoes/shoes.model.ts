@@ -4,6 +4,7 @@ import { Schema, model } from 'mongoose';
 
 const ShoeSchema = new Schema<TShoe, ShoeModel>(
   {
+    shoeId: { type: String, unique: true },
     name: { type: String },
     price: { type: Number },
     quantity: { type: Number },

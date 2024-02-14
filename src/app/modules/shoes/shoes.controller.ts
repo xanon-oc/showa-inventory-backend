@@ -64,7 +64,17 @@ const getAllShoes = catchAsync(async (req, res) => {
   });
 });
 
-// Implement a robust filtering system to effectively narrow down shoe selections based on various criteria.
+// product Verification Into DB
+
+const productVerification = catchAsync(async (req, res) => {
+  const result = await ShoeServices.productVerificationIntoDB(req.params.id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Shoe verification successful',
+    data: result,
+  });
+});
 
 export const ShoeControllers = {
   addAShoes,
@@ -72,4 +82,5 @@ export const ShoeControllers = {
   bulkDeleteShoes,
   updateShoeDetails,
   getAllShoes,
+  productVerification,
 };

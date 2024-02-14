@@ -30,6 +30,11 @@ router.put(
 // Read and view the list of shoes in the inventory.
 router.get('/getAllShoes', auth('admin'), ShoeControllers.getAllShoes);
 
-// Implement a robust filtering system to effectively narrow down shoe selections based on various criteria.
-// todo
+// product Verification Into DB
+router.get(
+  '/productVerification/:id',
+  auth('admin', 'user'),
+  ShoeControllers.productVerification,
+);
+
 export const ShoeRoutes = router;

@@ -4,10 +4,17 @@ import { TShoe } from './shoes.interface';
 import { Shoe } from './shoes.model';
 import QueryBuilder from '../../builder/QueryBuilder';
 import { InventorySearchableFields } from './shoes.constant';
+import { v4 as uuidv4 } from 'uuid';
 
 // Add a new pair of shoes to the inventory.
 const addAShoesIntoDB = async (payload: TShoe) => {
-  const result = await Shoe.create(payload);
+  // generating a unique ID for the shoe
+  const shoeId = uuidv4();
+  // assigning the generated ID to the payload
+  const payloadWithId = { ...payload, shoeId };
+
+  // Insert the shoe into the database
+  const result = await Shoe.create(payloadWithId);
   return result;
 };
 
@@ -77,7 +84,15 @@ const getAllShoesFromDB = async (query: Record<string, unknown>) => {
   };
 };
 
-// Implement a robust filtering system to effectively narrow down shoe selections based on various criteria.
+// Product Verification/ID Verification
+
+const productVerificationIntoDB = async (shoeId: string) => {
+  const isShoeVerificationSuccessFul = await Shoe.findOne({ shoeId });
+  if (!isShoeVerificationSuccessFul) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Product verification failed');
+  }
+  return isShoeVerificationSuccessFul;
+};
 
 export const ShoeServices = {
   addAShoesIntoDB,
@@ -85,4 +100,5 @@ export const ShoeServices = {
   bulkDeleteShoesFromDB,
   updateShoeDetailsOnDB,
   getAllShoesFromDB,
+  productVerificationIntoDB,
 };

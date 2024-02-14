@@ -15,6 +15,7 @@ export type TShoeSize = '7' | '8' | '9' | '10';
 export type TShoeColor = 'Red' | 'Blue' | 'Green';
 
 export type TShoe = {
+  shoeId: string;
   name: string;
   price: number;
   quantity: number;
@@ -24,7 +25,7 @@ export type TShoe = {
   style: TShoeStyle;
   size: TShoeSize;
   color: TShoeColor;
-  material: 'Leather' | 'fabric';
+  material: 'leather' | 'fabric';
 };
 
 export interface ShoeModel extends Model<TShoe> {
