@@ -32,8 +32,19 @@ const updateShoePolishRequest = catchAsync(async (req, res) => {
     data: result,
   });
 });
+// get shoe polish
+const getPolishStatusWithData = catchAsync(async (req, res) => {
+  const result = await ShoePolishRequestService.getPolishStatusWithDataFromDB();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'ALL soe polish request fetched successfully',
+    data: result,
+  });
+});
 
 export const ShoePolishRequestController = {
   addShoePolishRequest,
   updateShoePolishRequest,
+  getPolishStatusWithData,
 };

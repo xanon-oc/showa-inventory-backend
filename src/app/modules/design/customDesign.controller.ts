@@ -33,7 +33,20 @@ const updateCustomShoeDesign = catchAsync(async (req, res) => {
   });
 });
 
+// get custom shoe design from db
+
+const getCustomShoeDesign = catchAsync(async (req, res) => {
+  const result = await CustomShoeDesignService.getAllCustomShoeDesignFromDB();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Custom shoe design fetched successfully',
+    data: result,
+  });
+});
+
 export const CustomShoeDesignController = {
   addCustomShoeDesign,
   updateCustomShoeDesign,
+  getCustomShoeDesign,
 };

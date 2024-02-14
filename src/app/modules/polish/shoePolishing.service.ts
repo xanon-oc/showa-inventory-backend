@@ -55,8 +55,15 @@ const updateShoePolishRequestIntoDB = async ({
   }
 };
 
+// get polish
+const getPolishStatusWithDataFromDB = async () => {
+  const result = await ShoePolish.find();
+  return result;
+};
+
 // get all shoe polish from db
 export const ShoePolishRequestService = {
   addShoePolishRequestIntoDB,
   updateShoePolishRequestIntoDB,
+  getPolishStatusWithDataFromDB,
 };

@@ -20,5 +20,10 @@ router.patch(
   ),
   ShoePolishRequestController.updateShoePolishRequest,
 );
+router.get(
+  '/getAllShoePolishRequest',
+  auth('admin', 'user'),
+  ShoePolishRequestController.getPolishStatusWithData,
+);
 
 export const ShoePolish = router;

@@ -22,5 +22,10 @@ router.put(
   ),
   CustomShoeDesignController.updateCustomShoeDesign,
 );
+router.get(
+  '/getCustomShoeDesign',
+  auth('admin', 'user'),
+  CustomShoeDesignController.getCustomShoeDesign,
+);
 
 export const CustomShoeDesignRouter = router;

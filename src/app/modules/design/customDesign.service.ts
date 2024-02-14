@@ -53,7 +53,13 @@ const updateCustomShoeDesignToDB = async ({
 
 // get all custom design
 
+const getAllCustomShoeDesignFromDB = async () => {
+  const result = await CustomShoeDesign.find();
+  return result;
+};
+
 export const CustomShoeDesignService = {
   addCustomShoeDesignToDB,
   updateCustomShoeDesignToDB,
+  getAllCustomShoeDesignFromDB,
 };
