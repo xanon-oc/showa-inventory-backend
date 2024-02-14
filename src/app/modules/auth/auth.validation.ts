@@ -12,7 +12,7 @@ const AuthRegisterSchemaValidation = z.object({
     gender: z.enum(['male', 'female']),
     email: z.string().email(),
     password: z.string(),
-    role: z.enum(['admin', 'user']),
+    role: z.enum(['superAdmin', 'seller', 'user']),
   }),
 });
 

@@ -10,7 +10,7 @@ export type TUser = {
   gender: 'male' | 'female';
   email: string;
   password: string;
-  role: 'admin' | 'user';
+  role: 'superAdmin' | 'seller' | 'user';
 };
 
 export interface UserModel extends Model<TUser> {

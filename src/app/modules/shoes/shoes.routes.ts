@@ -3,38 +3,43 @@ import { ShoeControllers } from './shoes.controller';
 import ValidateRequest from '../../middlewares/validateRequest';
 import { ShoeValidation } from './shoes.validation';
 import auth from '../../middlewares/auth';
+import { USER_ROLE } from '../../types/index.type';
 
 const router = Router();
 
 // Add a new pair of shoes to the inventory.
 router.post(
   '/addNewPair',
-  auth('admin'),
+  auth(USER_ROLE.superAdmin, USER_ROLE.seller),
   ValidateRequest(ShoeValidation.ShoeValidationSchema),
   ShoeControllers.addAShoes,
 );
 
 // Delete existing shoes from the inventory.
-router.delete('/deleteShoe/:id', ShoeControllers.deleteShoes);
+router.delete(
+  '/deleteShoe/:id',
+  auth(USER_ROLE.superAdmin, USER_ROLE.seller),
+  ShoeControllers.deleteShoes,
+);
 // bulk Delete existing shoes from the inventory.
-router.delete('/bulkDeleteShoe', ShoeControllers.bulkDeleteShoes);
+router.delete(
+  '/bulkDeleteShoe',
+  auth(USER_ROLE.superAdmin, USER_ROLE.seller),
+  ShoeControllers.bulkDeleteShoes,
+);
 
 // Update shoe details.
 router.put(
   '/updateDetails/:id',
-  auth('admin'),
+  auth(USER_ROLE.superAdmin, USER_ROLE.seller),
   ValidateRequest(ShoeValidation.ShoeUpdateValidationSchema),
   ShoeControllers.updateShoeDetails,
 );
 
 // Read and view the list of shoes in the inventory.
-router.get('/getAllShoes', auth('admin'), ShoeControllers.getAllShoes);
+router.get('/getAllShoes', ShoeControllers.getAllShoes);
 
 // product Verification Into DB
-router.get(
-  '/productVerification/:id',
-  auth('admin', 'user'),
-  ShoeControllers.productVerification,
-);
+router.get('/productVerification/:id', ShoeControllers.productVerification);
 
 export const ShoeRoutes = router;

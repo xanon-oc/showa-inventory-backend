@@ -9,7 +9,7 @@ const AuthSchema = new Schema<TUser, UserModel>(
     email: { type: String, trim: true, unique: true },
     password: { type: String, trim: true },
     gender: { type: String, enum: ['male', 'female'] },
-    role: { type: String, enum: ['admin', 'user'] },
+    role: { type: String, enum: ['superAdmin', 'seller', 'user'] },
   },
   { timestamps: true, versionKey: false },
 );

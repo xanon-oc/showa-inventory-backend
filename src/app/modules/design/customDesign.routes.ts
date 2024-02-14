@@ -3,6 +3,7 @@ import ValidateRequest from '../../middlewares/validateRequest';
 import auth from '../../middlewares/auth';
 import { CustomShoeDesignSchemaValidation } from './customDesign.validation';
 import { CustomShoeDesignController } from './customDesign.controller';
+import { USER_ROLE } from '../../types/index.type';
 
 const router = Router();
 
@@ -16,7 +17,7 @@ router.post(
 );
 router.put(
   '/updateCustomShoeDesign/:id',
-  auth('admin', 'user'),
+  auth(USER_ROLE.user),
   ValidateRequest(
     CustomShoeDesignSchemaValidation.UpdateCustomShoeDesignSchemaValidation,
   ),
@@ -24,7 +25,7 @@ router.put(
 );
 router.get(
   '/getCustomShoeDesign',
-  auth('admin', 'user'),
+  auth(USER_ROLE.user, USER_ROLE.superAdmin, USER_ROLE.seller),
   CustomShoeDesignController.getCustomShoeDesign,
 );
 
