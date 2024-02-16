@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
 import AppError from '../../errors/AppError';
 import { User } from '../auth/auth.model';
@@ -19,6 +20,7 @@ const updateShoePolishRequestIntoDB = async ({
   id,
   status,
 }: TShoePolishUpdate) => {
+  console.log(id, status);
   // checking if the shoe polish request exists
   const isShoePolishExists = await ShoePolish.findById(id);
   if (!isShoePolishExists) {
@@ -56,7 +58,11 @@ const updateShoePolishRequestIntoDB = async ({
 };
 
 // get polish
-const getPolishStatusWithDataFromDB = async () => {
+const getPolishStatusWithDataFromDB = async (email: string) => {
+  const result = await ShoePolish.find({ userId: email });
+  return result;
+};
+const getAllPolishStatusWithDataFromDB = async () => {
   const result = await ShoePolish.find();
   return result;
 };
@@ -66,4 +72,5 @@ export const ShoePolishRequestService = {
   addShoePolishRequestIntoDB,
   updateShoePolishRequestIntoDB,
   getPolishStatusWithDataFromDB,
+  getAllPolishStatusWithDataFromDB,
 };

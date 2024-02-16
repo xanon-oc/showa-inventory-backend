@@ -9,7 +9,7 @@ const router = Router();
 
 router.post(
   '/addCustomShoeDesign',
-  auth('admin', 'user'),
+  auth(USER_ROLE.user, USER_ROLE.seller, USER_ROLE.superAdmin),
   ValidateRequest(
     CustomShoeDesignSchemaValidation.AddCustomShoeDesignSchemaValidation,
   ),
@@ -25,7 +25,7 @@ router.put(
 );
 router.get(
   '/getCustomShoeDesign',
-  auth(USER_ROLE.user, USER_ROLE.superAdmin, USER_ROLE.seller),
+  auth(USER_ROLE.user, USER_ROLE.seller),
   CustomShoeDesignController.getCustomShoeDesign,
 );
 

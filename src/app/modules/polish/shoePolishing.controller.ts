@@ -34,11 +34,23 @@ const updateShoePolishRequest = catchAsync(async (req, res) => {
 });
 // get shoe polish
 const getPolishStatusWithData = catchAsync(async (req, res) => {
-  const result = await ShoePolishRequestService.getPolishStatusWithDataFromDB();
+  const result = await ShoePolishRequestService.getPolishStatusWithDataFromDB(
+    req.params.email,
+  );
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'ALL soe polish request fetched successfully',
+    message: 'All shoe polish request fetched successfully',
+    data: result,
+  });
+});
+const getPolishData = catchAsync(async (req, res) => {
+  const result =
+    await ShoePolishRequestService.getAllPolishStatusWithDataFromDB();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'All shoe polish request fetched successfully',
     data: result,
   });
 });
@@ -47,4 +59,5 @@ export const ShoePolishRequestController = {
   addShoePolishRequest,
   updateShoePolishRequest,
   getPolishStatusWithData,
+  getPolishData,
 };

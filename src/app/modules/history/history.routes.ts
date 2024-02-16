@@ -7,7 +7,7 @@ const router = Router();
 
 router.get(
   '/salesHistory/:query',
-  auth(USER_ROLE.superAdmin, USER_ROLE.seller),
+  auth(USER_ROLE.seller),
   HistoryController.salesHistory,
 );
 

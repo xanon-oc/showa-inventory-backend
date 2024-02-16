@@ -10,7 +10,7 @@ const router = Router();
 // Add a new pair of shoes to the inventory.
 router.post(
   '/addNewPair',
-  auth(USER_ROLE.superAdmin, USER_ROLE.seller),
+  auth(USER_ROLE.seller),
   ValidateRequest(ShoeValidation.ShoeValidationSchema),
   ShoeControllers.addAShoes,
 );
@@ -18,20 +18,20 @@ router.post(
 // Delete existing shoes from the inventory.
 router.delete(
   '/deleteShoe/:id',
-  auth(USER_ROLE.superAdmin, USER_ROLE.seller),
+  auth(USER_ROLE.seller),
   ShoeControllers.deleteShoes,
 );
 // bulk Delete existing shoes from the inventory.
 router.delete(
   '/bulkDeleteShoe',
-  auth(USER_ROLE.superAdmin, USER_ROLE.seller),
+  auth(USER_ROLE.seller),
   ShoeControllers.bulkDeleteShoes,
 );
 
 // Update shoe details.
 router.put(
   '/updateDetails/:id',
-  auth(USER_ROLE.superAdmin, USER_ROLE.seller),
+  auth(USER_ROLE.seller),
   ValidateRequest(ShoeValidation.ShoeUpdateValidationSchema),
   ShoeControllers.updateShoeDetails,
 );

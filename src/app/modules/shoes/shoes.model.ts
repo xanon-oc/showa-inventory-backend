@@ -15,6 +15,7 @@ const ShoeSchema = new Schema<TShoe, ShoeModel>(
     size: { type: String, enum: ShoeSize },
     color: { type: String, enum: ShoeColor },
     material: { type: String, enum: ['leather', 'fabric'] },
+    imageUrl: { type: String },
   },
   { timestamps: true },
 );

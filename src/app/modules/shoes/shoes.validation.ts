@@ -13,6 +13,7 @@ const ShoeValidationSchema = z.object({
     size: z.enum(ShoeSize),
     color: z.enum(ShoeColor),
     material: z.enum(['leather', 'fabric']),
+    imageUrl: z.string(),
   }),
 });
 const ShoeUpdateValidationSchema = z.object({
@@ -27,6 +28,7 @@ const ShoeUpdateValidationSchema = z.object({
     size: z.enum(ShoeSize).optional(),
     color: z.enum(ShoeColor).optional(),
     material: z.enum(['leather', 'fabric']).optional(),
+    imageUrl: z.string().optional(),
   }),
 });
 

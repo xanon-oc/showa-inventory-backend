@@ -1,5 +1,4 @@
 import { z } from 'zod';
-
 const ShoePolishRequestAddSchema = z.object({
   body: z.object({
     userId: z.string(),

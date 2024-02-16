@@ -9,7 +9,7 @@ const router = Router();
 
 router.post(
   '/addSale',
-  auth(USER_ROLE.superAdmin, USER_ROLE.seller),
+  auth(USER_ROLE.seller),
   ValidateRequest(SalesValidation.SalesValidationSchema),
   SaleController.postSale,
 );

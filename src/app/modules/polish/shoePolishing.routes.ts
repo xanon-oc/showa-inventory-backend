@@ -9,22 +9,27 @@ const router = Router();
 
 router.post(
   '/addShoePolishRequest',
-  auth(USER_ROLE.user, USER_ROLE.superAdmin, USER_ROLE.seller),
+  auth(USER_ROLE.user, USER_ROLE.seller),
   ValidateRequest(ShoePolishRequestSchemaValidation.ShoePolishRequestAddSchema),
   ShoePolishRequestController.addShoePolishRequest,
 );
-router.patch(
+router.put(
   '/updateShoePolishRequest/:id',
-  auth(USER_ROLE.user, USER_ROLE.superAdmin, USER_ROLE.seller),
-  ValidateRequest(
-    ShoePolishRequestSchemaValidation.ShoePolishRequestUpdateSchema,
-  ),
+  // auth(USER_ROLE.user, USER_ROLE.seller),
+  // ValidateRequest(
+  //   ShoePolishRequestSchemaValidation.ShoePolishRequestUpdateSchema,
+  // ),
   ShoePolishRequestController.updateShoePolishRequest,
 );
 router.get(
-  '/getAllShoePolishRequest',
-  auth(USER_ROLE.user, USER_ROLE.superAdmin, USER_ROLE.seller),
+  '/getAllShoePolishRequest/:email',
+  auth(USER_ROLE.user, USER_ROLE.seller),
   ShoePolishRequestController.getPolishStatusWithData,
+);
+router.get(
+  '/getAllShoePolishRequest',
+  auth(USER_ROLE.user, USER_ROLE.seller),
+  ShoePolishRequestController.getPolishData,
 );
 
 export const ShoePolish = router;

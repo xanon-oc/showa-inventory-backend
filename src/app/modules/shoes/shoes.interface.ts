@@ -26,6 +26,7 @@ export type TShoe = {
   size: TShoeSize;
   color: TShoeColor;
   material: 'leather' | 'fabric';
+  imageUrl: string;
 };
 
 export interface ShoeModel extends Model<TShoe> {
