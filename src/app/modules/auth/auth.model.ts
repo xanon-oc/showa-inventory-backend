@@ -1,4 +1,4 @@
-import { Model, Schema, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { TUser, UserModel } from './auth.interface';
 import config from '../../config';
 import bcrypt from 'bcrypt';
@@ -9,7 +9,7 @@ const AuthSchema = new Schema<TUser, UserModel>(
     email: { type: String, trim: true, unique: true },
     password: { type: String, trim: true },
     gender: { type: String, enum: ['male', 'female'] },
-    role: { type: String, enum: ['superAdmin', 'seller', 'user'] },
+    role: { type: String, enum: ['seller', 'user'] },
   },
   { timestamps: true, versionKey: false },
 );
