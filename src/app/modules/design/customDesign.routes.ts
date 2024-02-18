@@ -9,7 +9,7 @@ const router = Router();
 
 router.post(
   '/addCustomShoeDesign',
-  auth(USER_ROLE.user, USER_ROLE.seller, USER_ROLE.superAdmin),
+  auth(USER_ROLE.user, USER_ROLE.seller),
   ValidateRequest(
     CustomShoeDesignSchemaValidation.AddCustomShoeDesignSchemaValidation,
   ),
